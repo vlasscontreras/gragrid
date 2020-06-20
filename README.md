@@ -1,4 +1,4 @@
-# Gravity Forms: SendGrid
+# Gravity Forms: SendGrid Add-On
 
 [![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/vlasscontreras/gravity-forms-sendgrid)
 [![WordPress Plugin: Required WP Version](https://img.shields.io/badge/wordpress-v5.2-blue)](https://github.com/vlasscontreras/gravity-forms-sendgrid)
