@@ -17,7 +17,6 @@
  * @author  Vladimir Contreras
  */
 class Gravity_Forms_SendGrid_API {
-
 	/**
 	 * SendGrid API key.
 	 *
@@ -46,13 +45,13 @@ class Gravity_Forms_SendGrid_API {
 	 * @since 1.0.0
 	 *
 	 * @access public
-	 * @return array
+	 * @return array|WP_Error
 	 */
 	public function get_lists() {
 		$response = $this->request( '/contactdb/lists' );
 
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return new WP_Error( __METHOD__, $response );
+			return $this->set_error( $response );
 		}
 
 		return $response['body'];
@@ -65,13 +64,13 @@ class Gravity_Forms_SendGrid_API {
 	 *
 	 * @access public
 	 * @param int $list_id SendGrid contact list ID.
-	 * @return array
+	 * @return array|WP_Error
 	 */
 	public function get_list( $list_id ) {
 		$response = $this->request( '/contactdb/lists/' . $list_id );
 
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return new WP_Error( __METHOD__, $response );
+			return $this->set_error( $response );
 		}
 
 		return $response['body'];
@@ -84,7 +83,7 @@ class Gravity_Forms_SendGrid_API {
 	 *
 	 * @access public
 	 * @param array $params Request parameters.
-	 * @return array
+	 * @return array|WP_Error
 	 */
 	public function add_recipient( $params ) {
 		$params = array( $params );
@@ -92,7 +91,7 @@ class Gravity_Forms_SendGrid_API {
 		$response = $this->request( '/contactdb/recipients', $params, 'POST' );
 
 		if ( 201 !== wp_remote_retrieve_response_code( $response ) ) {
-			return new WP_Error( __METHOD__, $response );
+			return $this->set_error( $response );
 		}
 
 		return $response['body'];
@@ -106,13 +105,13 @@ class Gravity_Forms_SendGrid_API {
 	 * @access public
 	 * @param array $list_id      Contact list ID.
 	 * @param array $recipient_id Recipient ID.
-	 * @return array
+	 * @return array|WP_Error
 	 */
 	public function add_list_recipient( $list_id, $recipient_id ) {
 		$response = $this->request( '/contactdb/lists/' . $list_id . '/recipients/' . $recipient_id, null, 'POST' );
 
 		if ( 201 !== wp_remote_retrieve_response_code( $response ) ) {
-			return new WP_Error( __METHOD__, $response );
+			return $this->set_error( $response );
 		}
 
 		return $response['body'];
@@ -190,5 +189,21 @@ class Gravity_Forms_SendGrid_API {
 		$response['body'] = json_decode( $response['body'], true );
 
 		return $response;
+	}
+
+	/**
+	 * Set an standardized errror
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $response API response.
+	 * @return WP_Error
+	 */
+	public function set_error( $response ) {
+		if ( isset( $response['body']['errors'][0]['message'] ) ) {
+			return new WP_Error( __METHOD__, $response['body']['errors'][0]['message'] );
+		} else {
+			return new WP_Error( __METHOD__, $response );
+		}
 	}
 }
