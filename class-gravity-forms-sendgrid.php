@@ -11,7 +11,7 @@
  * @author  Vladimir Contreras
  */
 
-GFForms::include_addon_framework();
+GFForms::include_feed_addon_framework();
 
 /**
  * The SendGrid Add-on Class
@@ -19,11 +19,11 @@ GFForms::include_addon_framework();
  * @since 1.0.0
  * @author  Vladimir Contreras
  */
-class Gravity_Forms_SendGrid extends GFAddOn {
+class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	/**
 	 * Contains an instance of this class, if available.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access private
 	 * @var    Gravity_Forms_SendGrid $_instance If available, contains an instance of this class.
@@ -33,7 +33,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the version of the SendGrid Add-On.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string $_version Contains the version, defined from gravity-forms-sendgrid.php
@@ -43,7 +43,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the minimum Gravity Forms version required.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string $_min_gravityforms_version The minimum version required.
@@ -53,7 +53,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the plugin slug.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string $_slug The slug used for this plugin.
@@ -63,7 +63,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the main plugin file.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string $_path The path to the main plugin file, relative to the plugins folder.
@@ -73,7 +73,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the full path to this class file.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string $_full_path The full path.
@@ -83,7 +83,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the URL where this Add-On can be found.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string The URL of the Add-On.
@@ -93,7 +93,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the title of this Add-On.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    string $_title The title of the Add-On.
@@ -103,7 +103,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Defines the short title of the Add-On.
 	 *
-	 * @since  1-0-0
+	 * @since 1-0-0
 	 *
 	 * @access protected
 	 * @var    string $_short_title The short title.
@@ -113,7 +113,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Contains an instance of the SendGrid API library.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access protected
 	 * @var    Gravity_Forms_SendGrid_API $api Contains an instance of the SendGrid API library.
@@ -134,7 +134,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Get an instance of this class.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access public
 	 * @return Gravity_Forms_SendGrid
@@ -150,7 +150,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Autoload the required libraries.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access public
 	 * @uses GFAddOn::is_gravityforms_supported()
@@ -166,7 +166,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	/**
 	 * Remove unneeded settings.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access public
 	 */
@@ -184,7 +184,7 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 	 * Configures the settings which should be rendered on the add-on
 	 * settings tab.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @access public
 	 * @return array
@@ -211,12 +211,237 @@ class Gravity_Forms_SendGrid extends GFAddOn {
 		);
 	}
 
+	// # FEED SETTINGS ----------------------------------------------
+
+	/**
+	 * Configures the settings which should be rendered on the feed edit page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function feed_settings_fields() {
+		$settings = array(
+			array(
+				'title'  => esc_html__( 'Mailchimp Feed Settings', 'gravity-forms-sendgrid' ),
+				'fields' => array(
+					array(
+						'name'     => 'feedName',
+						'label'    => esc_html__( 'Name', 'gravity-forms-sendgrid' ),
+						'type'     => 'text',
+						'required' => true,
+						'class'    => 'medium',
+						'tooltip'  => sprintf(
+							'<h6>%s</h6>%s',
+							esc_html__( 'Name', 'gravity-forms-sendgrid' ),
+							esc_html__( 'Enter a feed name to uniquely identify this setup.', 'gravity-forms-sendgrid' )
+						),
+					),
+					array(
+						'name'     => 'sendgrid_list',
+						'label'    => esc_html__( 'SendGrid Contact List', 'gravity-forms-sendgrid' ),
+						'type'     => 'sendgrid_list',
+						'required' => true,
+						'tooltip'  => sprintf(
+							'<h6>%s</h6>%s',
+							esc_html__( 'SendGrid Contact List', 'gravity-forms-sendgrid' ),
+							esc_html__( 'Select the contact list you would like to add emails s to.', 'gravity-forms-sendgrid' )
+						),
+					),
+				),
+			),
+			array(
+				'fields' => array(
+					array(
+						'name'      => 'mapped_fields',
+						'label'     => esc_html__( 'Map Fields', 'gravity-forms-sendgrid' ),
+						'type'      => 'field_map',
+						'field_map' => $this->sengrid_field_map(),
+						'tooltip'   => sprintf(
+							'<h6>%s</h6>%s',
+							esc_html__( 'Map Fields', 'gravity-forms-sendgrid' ),
+							esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gravity-forms-sendgrid' )
+						),
+					),
+					array( 'type' => 'save' ),
+				),
+			),
+		);
+
+		return $settings;
+	}
+
+	/**
+	 * Define the markup for the sendgrid_list type field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 * @param array $field The field properties.
+	 * @param bool  $echo  Should the setting markup be echoed. Defaults to true.
+	 * @return string
+	 */
+	public function settings_sendgrid_list( $field, $echo = true ) {
+		if ( ! $this->init_api() ) {
+			return;
+		}
+
+		try {
+			$this->log_debug( __METHOD__ . ': Retrieving contact lists.' );
+
+			$lists = $this->api->get_lists();
+		} catch ( Exception $e ) {
+			$this->log_error( __METHOD__ . ': Could not retrieve the contact lists ' . $e->getMessage() );
+
+			printf(
+				// Translators: 1 line break, 2 error message.
+				esc_html__( 'Could not load the contact lists. %1$sError: %2$s', 'gravity-forms-sendgrid' ),
+				'<br/>',
+				$e->getMessage()
+			); // phpcs:ignore: XSS ok.
+
+			return;
+		}
+
+		if ( ! count( $lists['lists'] ) > 0 ) {
+			$this->log_error( __METHOD__ . ': API retured empty set of lists.' );
+
+			printf( esc_html__( 'You don\'t have contact lists in your account. Please create one first and try again.', 'gravity-forms-sendgrid' ) );
+
+			return;
+		}
+
+		// Initialize select options.
+		$options = array(
+			array(
+				'label' => esc_html__( 'Select a SendGrid list', 'gravity-forms-sendgrid' ),
+				'value' => '',
+			),
+		);
+
+		foreach ( $lists['lists'] as $list ) {
+			$options[] = array(
+				'label' => esc_html( $list['name'] . ' (' . $list['recipient_count'] . ')' ),
+				'value' => esc_attr( $list['id'] ),
+			);
+
+		}
+
+		// Add select field properties.
+		$field['type']    = 'select';
+		$field['choices'] = $options;
+
+		// Generate select field.
+		$html = $this->settings_select( $field, false );
+
+		if ( $echo ) {
+			echo $html; // phpcs:ignore: XSS ok.
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Return an array of Mailchimp list/audience fields which can be mapped to the Form fields/entry meta.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function sengrid_field_map() {
+		return array(
+			'email'      => array(
+				'name'       => 'email',
+				'label'      => esc_html__( 'Email Address', 'gravity-forms-sendgrid' ),
+				'required'   => true,
+				'field_type' => array( 'email', 'hidden' ),
+			),
+			'first_name' => array(
+				'name'       => 'text',
+				'label'      => esc_html__( 'First Name', 'gravity-forms-sendgrid' ),
+				'required'   => false,
+				'field_type' => array( 'name', 'text', 'hidden' ),
+			),
+			'last_name'  => array(
+				'name'       => 'text',
+				'label'      => esc_html__( 'Last Name', 'gravity-forms-sendgrid' ),
+				'required'   => false,
+				'field_type' => array( 'name', 'text', 'hidden' ),
+			),
+		);
+	}
+
+	/**
+	 * Prevent feeds being listed or created if the API key isn't valid.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 * @return bool
+	 */
+	public function can_create_feed() {
+		return $this->init_api();
+	}
+
+	/**
+	 * Allow the feed to be duplicated.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array|int $id The ID of the feed to be duplicated or the feed object when duplicating a form.
+	 * @return bool
+	 */
+	public function can_duplicate_feed( $id ) {
+		return true;
+	}
+
+	/**
+	 * Configures which columns should be displayed on the feed list page.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @access public
+	 * @return array
+	 */
+	public function feed_list_columns() {
+		return array(
+			'feedName'      => esc_html__( 'Name', 'gravity-forms-sendgrid' ),
+			'sendgrid_list' => esc_html__( 'SendGrid List', 'gravity-forms-sendgrid' ),
+		);
+	}
+
+	/**
+	 * Get the name of the SendGrid list for the feed table view.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $feed The feed being included in the feed list.
+	 * @return string
+	 */
+	public function get_column_value_sendgrid_list( $feed ) {
+		if ( ! $this->init_api() ) {
+			return rgars( $feed, 'meta/sendgrid_list' );
+		}
+
+		try {
+			$list = $this->api->get_list( rgars( $feed, 'meta/sendgrid_list' ) );
+
+			return $list['name'];
+		} catch ( Exception $e ) {
+			$this->log_error( __METHOD__ . ': Could not retrieve the contact list: ' . $e->getMessage() );
+
+			return rgars( $feed, 'meta/sendgrid_list' );
+		}
+	}
+
 	// # HELPERS ----------------------------------------------------
 
 	/**
 	 * Initializes SendGrid API if credentials are valid.
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @uses GFAddOn::get_plugin_setting()
 	 * @uses GFAddOn::log_debug()
