@@ -208,7 +208,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	public function feed_settings_fields() {
 		$settings = array(
 			array(
-				'title'  => esc_html__( 'Mailchimp Feed Settings', 'gravity-forms-sendgrid' ),
+				'title'  => esc_html__( 'SendGrid Feed Settings', 'gravity-forms-sendgrid' ),
 				'fields' => array(
 					array(
 						'name'     => 'feedName',
@@ -327,7 +327,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	}
 
 	/**
-	 * Return an array of Mailchimp list/audience fields which can be mapped to the Form fields/entry meta.
+	 * Return an array of SendGrid list/audience fields which can be mapped to the Form fields/entry meta.
 	 *
 	 * @since 1.0.0
 	 *

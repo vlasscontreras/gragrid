@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'GRAVITY_FORMS_SENDGRID_VERSION', '1.0.0' );
 
 /**
- * If the Feed Add-On Framework exists, Mailchimp Add-On is loaded.
+ * If the Feed Add-On Framework exists, SendGrid Add-On is loaded.
  *
  * @since 1.0.0
  */
