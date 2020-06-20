@@ -176,12 +176,17 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	public function plugin_settings_fields() {
 		return array(
 			array(
-				'description' => '<p>' . sprintf(
-					// Translators: 1 opening anchor tag, 2 closing anchor tag.
-					esc_html__( 'Delivering your transactional and marketing emails through the world\'s largest cloud-based email delivery platform. Send with confidence. If you don\'t have a SendGrid account, you can %1$ssign up for one here.%2$s', 'gravity-forms-sendgrid' ),
-					'<a href="http://sendgrid.com/" target="_blank" rel="noopener noreferrer">',
-					'</a>'
-				) . '</p>',
+				'description' => sprintf(
+					'<p>%s</p>',
+					sprintf(
+						// Translators: 1 open anchor tag, 2 close anchor tag, 3 open anchor tag, 4 close anchor tag.
+						esc_html__( 'SendGrid makes it easy to reliably send email notifications. If you don\'t have a SendGrid account, you can %1$ssign up for one here%2$s. Once you have signed up, you can %3$sfind your API keys here%4$s.', 'gravity-forms-sendgrid' ),
+						'<a href="https://sendgrid.com" target="_blank" rel="noopener noreferrer">',
+						'</a>',
+						'<a href="https://app.sendgrid.com/settings/api_keys" target="_blank" rel="noopener noreferrer">',
+						'</a>'
+					)
+				),
 				'fields'      => array(
 					array(
 						'name'              => 'api_key',
