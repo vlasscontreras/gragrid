@@ -11,7 +11,4 @@ jobs:
     - uses: php-actions/composer@v1
 
     - name: Validate PHP
-      run: |
-        composer validate
-        composer install --prefer-dist --no-progress --no-suggest
-        composer lint:wpcs
+      run: composer lint:wpcs
