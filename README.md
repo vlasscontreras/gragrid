@@ -1,0 +1,14 @@
+# Gravity Forms: SendGrid Add-On
+
+[![GitHub Workflows](https://github.com/vlasscontreras/gravity-forms-sendgrid/workflows/Build/badge.svg)](https://github.com/vlasscontreras/gravity-forms-sendgrid)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/vlasscontreras/gravity-forms-sendgrid)
+[![WordPress Plugin: Required WP Version](https://img.shields.io/badge/wordpress-v5.2-blue)](https://github.com/vlasscontreras/gravity-forms-sendgrid)
+[![WordPress Plugin: Tested WP Version](https://img.shields.io/badge/wordpress-v5.4.2%20tested-brightgreen)](https://github.com/vlasscontreras/gravity-forms-sendgrid)
+
+Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.
+
+![Plugin Screenshot](screenshot-1.png)
+![Plugin Screenshot](screenshot-2.png)
+![Plugin Screenshot](screenshot-3.png)
+
+_Inspired by [Gravity Form Mailchimp Add-On](https://www.gravityforms.com/add-ons/mailchimp/)._
