@@ -46,11 +46,29 @@ class Gravity_Forms_SendGrid_API {
 	 * @since 1.0.0
 	 *
 	 * @access public
-	 * @param array $params Request parameters.
 	 * @return array
 	 */
-	public function get_lists( $params = '' ) {
-		$response = $this->request( '/contactdb/lists', $params );
+	public function get_lists() {
+		$response = $this->request( '/contactdb/lists' );
+
+		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return new WP_Error( __METHOD__, $response );
+		}
+
+		return $response['body'];
+	}
+
+	/**
+	 * Get a SendGrid contact list.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 * @param int $list_id SendGrid contact list ID.
+	 * @return array
+	 */
+	public function get_list( $list_id ) {
+		$response = $this->request( '/contactdb/lists/' . $list_id );
 
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			return new WP_Error( __METHOD__, $response );
