@@ -1,0 +1,46 @@
+name: Upload Release
+
+on:
+  push:
+    tags:
+    - 'v*'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Create archive
+        run: git archive -o gravity-forms-sendgrid-${{ steps.get_version.outputs.VERSION }}.zip HEAD
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release
+        uses: actions/upload-release-asset@v1.0.1
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gravity-forms-sendgrid-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: gravity-forms-sendgrid-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
