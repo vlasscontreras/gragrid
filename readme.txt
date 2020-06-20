@@ -25,19 +25,17 @@ Integrate your Gravity Forms with SendGrid to send submissions with email fields
 
 = Can this plugin be installed at the same time as the official SendGrid Gravity Forms add-on? =
 
-Yes. The official add-on and this plugin have different purposes and do not have conflicts.
+Yes. The official add-on and this plugin have different purposes and do not have conflicts in between.
 
 = Can this plugin be installed at the same time as the official SendGrid WordPress plugin? =
 
-Yes. Just like Gravity Forms' SendGrid add-on, this plugin serves a different purpose and does not conflict with them.
+Yes. Just like Gravity Forms' SendGrid add-on, this plugin serves a different purpose and does not conflict with it.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Plugin settings page
+2. Multiple feeds, send submissions to multiple lists
+3. Feed settings page
 
 == Changelog ==
 

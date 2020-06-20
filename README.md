@@ -7,4 +7,8 @@
 
 Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.
 
+![Plugin Screenshot](screenshot-1.png)
+![Plugin Screenshot](screenshot-2.png)
+![Plugin Screenshot](screenshot-3.png)
+
 _Inspired by [Gravity Form Mailchimp Add-On](https://www.gravityforms.com/add-ons/mailchimp/)._
