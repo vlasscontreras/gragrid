@@ -2,7 +2,6 @@
 /**
  * The SendGrid Add-on
  *
- * phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
  * phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
  *
  * @since 1.0.0
@@ -163,21 +162,6 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		}
 	}
 
-	/**
-	 * Remove unneeded settings.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 */
-	public function uninstall() {
-		parent::uninstall();
-
-		GFCache::delete( 'sendgrid_plugin_settings' );
-		delete_option( 'gravity_forms_sendgrid_settings' );
-		delete_option( 'gravity_forms_sendgrid_version' );
-	}
-
 	// # PLUGIN SETTINGS --------------------------------------------
 
 	/**
@@ -254,7 +238,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 			array(
 				'fields' => array(
 					array(
-						'name'      => 'mapped_fields',
+						'name'      => 'mappedFields',
 						'label'     => esc_html__( 'Map Fields', 'gravity-forms-sendgrid' ),
 						'type'      => 'field_map',
 						'field_map' => $this->sengrid_field_map(),
@@ -288,7 +272,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		}
 
 		try {
-			$this->log_debug( __METHOD__ . ': Retrieving contact lists.' );
+			$this->log_debug( __METHOD__ . '(): Retrieving contact lists.' );
 
 			$lists = $this->api->get_lists();
 		} catch ( Exception $e ) {
@@ -359,13 +343,13 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 				'field_type' => array( 'email', 'hidden' ),
 			),
 			'first_name' => array(
-				'name'       => 'text',
+				'name'       => 'first_name',
 				'label'      => esc_html__( 'First Name', 'gravity-forms-sendgrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
 			),
 			'last_name'  => array(
-				'name'       => 'text',
+				'name'       => 'last_name',
 				'label'      => esc_html__( 'Last Name', 'gravity-forms-sendgrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
@@ -436,6 +420,57 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		}
 	}
 
+	// # FEED PROCESSING -----------------------------------------------------------------------------------------------
+
+	/**
+	 * Process the feed e.g. subscribe the user to a list.
+	 *
+	 * @param array $feed The feed object to be processed.
+	 * @param array $entry The entry object currently being processed.
+	 * @param array $form The form object currently being processed.
+	 *
+	 * @return bool|void
+	 */
+	public function process_feed( $feed, $entry, $form ) {
+		if ( ! $this->init_api() ) {
+			$this->add_feed_error( esc_html__( 'Unable to process feed because API could not be initialized.', 'gravity-forms-sendgrid' ), $feed, $entry, $form );
+
+			return $entry;
+		}
+
+		$fields     = $this->get_field_map_fields( $feed, 'mappedFields' );
+		$merge_vars = array_fill_keys( array_keys( $this->sengrid_field_map() ), null );
+
+		foreach ( $fields as $name => $field_id ) {
+			$merge_vars[ $name ] = $this->get_field_value( $form, $entry, $field_id );
+		}
+
+		try {
+			// Save recipient to contact DB.
+			$recipient = $this->api->add_recipient( $merge_vars );
+
+			if ( is_wp_error( $recipient ) ) {
+				// Translators: %s error message.
+				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to contact DB: %s', 'gravity-forms-sendgrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
+			}
+
+			// Add recipient to contact list.
+			$recipient = $this->api->add_list_recipient( rgars( $feed, 'meta/sendgrid_list' ), $recipient['persisted_recipients'][0] );
+
+			if ( is_wp_error( $recipient ) ) {
+				// Translators: %s error message.
+				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gravity-forms-sendgrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
+			}
+
+			return $entry;
+		} catch ( Exception $e ) {
+			// Translators: %s error message.
+			$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gravity-forms-sendgrid' ), $e->getMessage() ), $feed, $entry, $form );
+
+			return $entry;
+		}
+	}
+
 	// # HELPERS ----------------------------------------------------
 
 	/**
@@ -467,26 +502,22 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 			return null;
 		}
 
-		$this->log_debug( __METHOD__ . ': Validating API key.' );
+		$this->log_debug( __METHOD__ . '(): Validating API key.' );
 
 		try {
-			// Assign API library to class.
 			$this->api = new Gravity_Forms_SendGrid_API( $api_key );
 
 			if ( $this->api->valid_key() ) {
-				// Log that authentication test passed.
-				$this->log_debug( __METHOD__ . ': SendGrid successfully authenticated.' );
+				$this->log_debug( __METHOD__ . '(): SendGrid successfully authenticated.' );
 
 				return true;
 			} else {
-				// Log that authentication test passed.
-				$this->log_debug( __METHOD__ . ': Unable to authenticate with SendGrid.' );
+				$this->log_debug( __METHOD__ . '(): Unable to authenticate with SendGrid.' );
 
 				return false;
 			}
 		} catch ( Exception $e ) {
-			// Log that authentication test failed.
-			$this->log_error( __METHOD__ . ': Unable to authenticate with SendGrid; ' . $e->getMessage() );
+			$this->log_error( __METHOD__ . '(): Unable to authenticate with SendGrid; ' . $e->getMessage() );
 
 			return false;
 		}

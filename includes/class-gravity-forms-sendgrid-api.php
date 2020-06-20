@@ -50,7 +50,7 @@ class Gravity_Forms_SendGrid_API {
 	public function get_lists() {
 		$response = $this->request( '/contactdb/lists' );
 
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( ! $this->is_valid_response( $response, 200 ) ) {
 			return $this->set_error( $response );
 		}
 
@@ -69,7 +69,7 @@ class Gravity_Forms_SendGrid_API {
 	public function get_list( $list_id ) {
 		$response = $this->request( '/contactdb/lists/' . $list_id );
 
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( ! $this->is_valid_response( $response, 200 ) ) {
 			return $this->set_error( $response );
 		}
 
@@ -86,11 +86,10 @@ class Gravity_Forms_SendGrid_API {
 	 * @return array|WP_Error
 	 */
 	public function add_recipient( $params ) {
-		$params = array( $params );
-
+		$params   = array( $params );
 		$response = $this->request( '/contactdb/recipients', $params, 'POST' );
 
-		if ( 201 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( ! $this->is_valid_response( $response, 201 ) ) {
 			return $this->set_error( $response );
 		}
 
@@ -110,7 +109,7 @@ class Gravity_Forms_SendGrid_API {
 	public function add_list_recipient( $list_id, $recipient_id ) {
 		$response = $this->request( '/contactdb/lists/' . $list_id . '/recipients/' . $recipient_id, null, 'POST' );
 
-		if ( 201 !== wp_remote_retrieve_response_code( $response ) ) {
+		if ( ! $this->is_valid_response( $response, 201 ) ) {
 			return $this->set_error( $response );
 		}
 
@@ -140,7 +139,6 @@ class Gravity_Forms_SendGrid_API {
 	 * @return array
 	 */
 	private function request( $path = '', $data = array(), $method = 'GET' ) {
-
 		if ( rgblank( $this->api_key ) ) {
 			return new WP_Error( __METHOD__, __( 'API key must be defined to process an API request.', 'gravity-forms-sendgrid' ) );
 		}
@@ -192,6 +190,25 @@ class Gravity_Forms_SendGrid_API {
 	}
 
 	/**
+	 * Check if the response is valid.
+	 *
+	 * @param array $response Request response.
+	 * @param int   $code     Expected response code.
+	 * @return bool
+	 */
+	private function is_valid_response( $response, $code ) {
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		if ( wp_remote_retrieve_response_code( $response ) !== $code ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Set an standardized errror
 	 *
 	 * @since 1.0.0
@@ -199,8 +216,10 @@ class Gravity_Forms_SendGrid_API {
 	 * @param array $response API response.
 	 * @return WP_Error
 	 */
-	public function set_error( $response ) {
-		if ( isset( $response['body']['errors'][0]['message'] ) ) {
+	private function set_error( $response ) {
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		} elseif ( isset( $response['body']['errors'][0]['message'] ) ) {
 			return new WP_Error( __METHOD__, $response['body']['errors'][0]['message'] );
 		} else {
 			return new WP_Error( __METHOD__, $response );
