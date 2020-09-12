@@ -18,7 +18,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Create archive
-        run: git archive -o gravity-forms-sendgrid-${{ steps.get_version.outputs.VERSION }}.zip HEAD
+        run: git archive -o gragrid-${{ steps.get_version.outputs.VERSION }}.zip HEAD
 
       - name: Create release
         id: create_release
@@ -41,6 +41,6 @@ jobs:
 
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./gravity-forms-sendgrid-${{ steps.get_version.outputs.VERSION }}.zip
-          asset_name: gravity-forms-sendgrid-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_path: ./gragrid-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: gragrid-${{ steps.get_version.outputs.VERSION }}.zip
           asset_content_type: application/zip

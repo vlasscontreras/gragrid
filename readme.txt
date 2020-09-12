@@ -1,9 +1,9 @@
-=== Gravity Forms: SendGrid Add-On ===
+=== Gragrid: Gravity Forms + SendGrid ===
 Contributors: vlass
-Donate link: https://github.com/vlasscontreras/gravity-forms-sendgrid
+Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.4.2
+Tested up to: 5.5.1
 Requires PHP: 7.2
 Stable tag: 1.0.0
 License: GPLv2 or later

@@ -1,5 +1,5 @@
 {
-    "name": "vlasscontreras/gravity-forms-sendgrid",
+    "name": "vlasscontreras/gragrid",
     "type": "wordpress-plugin",
     "description": "Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.",
     "keywords": [
@@ -7,12 +7,12 @@
         "Plugin",
         "Gravity Forms"
     ],
-    "homepage": "https://github.com/vlasscontreras/gravity-forms-sendgrid",
+    "homepage": "https://github.com/vlasscontreras/gragrid",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Contributors",
-            "homepage": "https://github.com/vlasscontreras/gravity-forms-sendgrid/graphs/contributors"
+            "homepage": "https://github.com/vlasscontreras/gragrid/graphs/contributors"
         }
     ],
     "require": {
@@ -28,10 +28,10 @@
     "scripts": {
         "lint:wpcs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
         "lint:php": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vendor .",
-        "make-pot": "wp i18n make-pot . languages/gravity-forms-sendgrid.pot"
+        "make-pot": "wp i18n make-pot . languages/gragrid.pot"
     },
     "support": {
-        "issues": "https://github.com/vlasscontreras/gravity-forms-sendgrid/issues",
-        "source": "https://github.com/vlasscontreras/gravity-forms-sendgrid"
+        "issues": "https://github.com/vlasscontreras/gragrid/issues",
+        "source": "https://github.com/vlasscontreras/gragrid"
     }
 }

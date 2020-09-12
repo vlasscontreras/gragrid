@@ -6,7 +6,7 @@
  *
  * @since 1.0.0
  *
- * @package Gravity_Forms_SendGrid
+ * @package Gragrid
  * @author  Vladimir Contreras
  */
 
@@ -18,14 +18,14 @@ GFForms::include_feed_addon_framework();
  * @since 1.0.0
  * @author  Vladimir Contreras
  */
-class Gravity_Forms_SendGrid extends GFFeedAddOn {
+class Gragrid extends GFFeedAddOn {
 	/**
 	 * Contains an instance of this class, if available.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @access private
-	 * @var    Gravity_Forms_SendGrid $_instance If available, contains an instance of this class.
+	 * @var    Gragrid $_instance If available, contains an instance of this class.
 	 */
 	private static $_instance = null;
 
@@ -35,9 +35,9 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @since 1.0.0
 	 *
 	 * @access protected
-	 * @var    string $_version Contains the version, defined from gravity-forms-sendgrid.php
+	 * @var    string $_version Contains the version, defined from gragrid.php
 	 */
-	protected $_version = GRAVITY_FORMS_SENDGRID_VERSION;
+	protected $_version = GRAGRID_VERSION;
 
 	/**
 	 * Defines the minimum Gravity Forms version required.
@@ -57,7 +57,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @access protected
 	 * @var    string $_slug The slug used for this plugin.
 	 */
-	protected $_slug = 'gravity-forms-sendgrid';
+	protected $_slug = 'gragrid';
 
 	/**
 	 * Defines the main plugin file.
@@ -67,7 +67,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @access protected
 	 * @var    string $_path The path to the main plugin file, relative to the plugins folder.
 	 */
-	protected $_path = 'gravity-forms-sendgrid/gravity-forms-sendgrid.php';
+	protected $_path = 'gragrid/gragrid.php';
 
 	/**
 	 * Defines the full path to this class file.
@@ -87,7 +87,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @access protected
 	 * @var    string The URL of the Add-On.
 	 */
-	protected $_url = 'https://github.com/vlasscontreras/gravity-forms-sendgrid';
+	protected $_url = 'https://github.com/vlasscontreras/gragrid';
 
 	/**
 	 * Defines the title of this Add-On.
@@ -115,7 +115,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @since 1.0.0
 	 *
 	 * @access protected
-	 * @var    Gravity_Forms_SendGrid_API $api Contains an instance of the SendGrid API library.
+	 * @var    Gragrid_API $api Contains an instance of the SendGrid API library.
 	 */
 	public $api = null;
 
@@ -127,7 +127,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	public function __construct() {
 		parent::__construct();
 
-		$this->_title = __( 'Gravity Forms: SendGrid Add-on', 'gravity-forms-sendgrid' );
+		$this->_title = __( 'Gravity Forms: SendGrid Add-on', 'gragrid' );
 	}
 
 	/**
@@ -136,7 +136,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @since 1.0.0
 	 *
 	 * @access public
-	 * @return Gravity_Forms_SendGrid
+	 * @return Gragrid
 	 */
 	public static function get_instance() {
 		if ( null === self::$_instance ) {
@@ -157,8 +157,8 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	public function pre_init() {
 		parent::pre_init();
 
-		if ( $this->is_gravityforms_supported() && ! class_exists( 'Gravity_Forms_SendGrid_API' ) ) {
-			require_once 'includes/class-gravity-forms-sendgrid-api.php';
+		if ( $this->is_gravityforms_supported() && ! class_exists( 'Gragrid_API' ) ) {
+			require_once 'includes/class-gragrid-api.php';
 		}
 	}
 
@@ -180,7 +180,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 					'<p>%s</p>',
 					sprintf(
 						// Translators: 1 open anchor tag, 2 close anchor tag, 3 open anchor tag, 4 close anchor tag.
-						esc_html__( 'SendGrid makes it easy to reliably send email notifications. If you don\'t have a SendGrid account, you can %1$ssign up for one here%2$s. Once you have signed up, you can %3$sfind your API keys here%4$s.', 'gravity-forms-sendgrid' ),
+						esc_html__( 'SendGrid makes it easy to reliably send email notifications. If you don\'t have a SendGrid account, you can %1$ssign up for one here%2$s. Once you have signed up, you can %3$sfind your API keys here%4$s.', 'gragrid' ),
 						'<a href="https://sendgrid.com" target="_blank" rel="noopener noreferrer">',
 						'</a>',
 						'<a href="https://app.sendgrid.com/settings/api_keys" target="_blank" rel="noopener noreferrer">',
@@ -190,7 +190,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 				'fields'      => array(
 					array(
 						'name'              => 'api_key',
-						'label'             => esc_html__( 'SendGrid API Key', 'gravity-forms-sendgrid' ),
+						'label'             => esc_html__( 'SendGrid API Key', 'gragrid' ),
 						'type'              => 'text',
 						'class'             => 'medium',
 						'feedback_callback' => array( $this, 'init_api' ),
@@ -213,29 +213,29 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	public function feed_settings_fields() {
 		$settings = array(
 			array(
-				'title'  => esc_html__( 'SendGrid Feed Settings', 'gravity-forms-sendgrid' ),
+				'title'  => esc_html__( 'SendGrid Feed Settings', 'gragrid' ),
 				'fields' => array(
 					array(
 						'name'     => 'feedName',
-						'label'    => esc_html__( 'Name', 'gravity-forms-sendgrid' ),
+						'label'    => esc_html__( 'Name', 'gragrid' ),
 						'type'     => 'text',
 						'required' => true,
 						'class'    => 'medium',
 						'tooltip'  => sprintf(
 							'<h6>%s</h6>%s',
-							esc_html__( 'Name', 'gravity-forms-sendgrid' ),
-							esc_html__( 'Enter a feed name to uniquely identify this setup.', 'gravity-forms-sendgrid' )
+							esc_html__( 'Name', 'gragrid' ),
+							esc_html__( 'Enter a feed name to uniquely identify this setup.', 'gragrid' )
 						),
 					),
 					array(
 						'name'     => 'sendgrid_list',
-						'label'    => esc_html__( 'SendGrid Contact List', 'gravity-forms-sendgrid' ),
+						'label'    => esc_html__( 'SendGrid Contact List', 'gragrid' ),
 						'type'     => 'sendgrid_list',
 						'required' => true,
 						'tooltip'  => sprintf(
 							'<h6>%s</h6>%s',
-							esc_html__( 'SendGrid Contact List', 'gravity-forms-sendgrid' ),
-							esc_html__( 'Select the contact list you would like to add emails s to.', 'gravity-forms-sendgrid' )
+							esc_html__( 'SendGrid Contact List', 'gragrid' ),
+							esc_html__( 'Select the contact list you would like to add emails s to.', 'gragrid' )
 						),
 					),
 				),
@@ -244,13 +244,13 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 				'fields' => array(
 					array(
 						'name'      => 'mappedFields',
-						'label'     => esc_html__( 'Map Fields', 'gravity-forms-sendgrid' ),
+						'label'     => esc_html__( 'Map Fields', 'gragrid' ),
 						'type'      => 'field_map',
 						'field_map' => $this->sengrid_field_map(),
 						'tooltip'   => sprintf(
 							'<h6>%s</h6>%s',
-							esc_html__( 'Map Fields', 'gravity-forms-sendgrid' ),
-							esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gravity-forms-sendgrid' )
+							esc_html__( 'Map Fields', 'gragrid' ),
+							esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gragrid' )
 						),
 					),
 					array( 'type' => 'save' ),
@@ -285,7 +285,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 
 			printf(
 				// Translators: 1 line break, 2 error message.
-				esc_html__( 'Could not load the contact lists. %1$sError: %2$s', 'gravity-forms-sendgrid' ),
+				esc_html__( 'Could not load the contact lists. %1$sError: %2$s', 'gragrid' ),
 				'<br/>',
 				$e->getMessage()
 			); // phpcs:ignore: XSS ok.
@@ -296,7 +296,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		if ( ! count( $lists['lists'] ) > 0 ) {
 			$this->log_error( __METHOD__ . ': API retured empty set of lists.' );
 
-			printf( esc_html__( 'You don\'t have contact lists in your account. Please create one first and try again.', 'gravity-forms-sendgrid' ) );
+			printf( esc_html__( 'You don\'t have contact lists in your account. Please create one first and try again.', 'gragrid' ) );
 
 			return;
 		}
@@ -304,7 +304,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		// Initialize select options.
 		$options = array(
 			array(
-				'label' => esc_html__( 'Select a SendGrid list', 'gravity-forms-sendgrid' ),
+				'label' => esc_html__( 'Select a SendGrid list', 'gragrid' ),
 				'value' => '',
 			),
 		);
@@ -343,19 +343,19 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		return array(
 			'email'      => array(
 				'name'       => 'email',
-				'label'      => esc_html__( 'Email Address', 'gravity-forms-sendgrid' ),
+				'label'      => esc_html__( 'Email Address', 'gragrid' ),
 				'required'   => true,
 				'field_type' => array( 'email', 'hidden' ),
 			),
 			'first_name' => array(
 				'name'       => 'first_name',
-				'label'      => esc_html__( 'First Name', 'gravity-forms-sendgrid' ),
+				'label'      => esc_html__( 'First Name', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
 			),
 			'last_name'  => array(
 				'name'       => 'last_name',
-				'label'      => esc_html__( 'Last Name', 'gravity-forms-sendgrid' ),
+				'label'      => esc_html__( 'Last Name', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
 			),
@@ -396,8 +396,8 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 */
 	public function feed_list_columns() {
 		return array(
-			'feedName'      => esc_html__( 'Name', 'gravity-forms-sendgrid' ),
-			'sendgrid_list' => esc_html__( 'SendGrid List', 'gravity-forms-sendgrid' ),
+			'feedName'      => esc_html__( 'Name', 'gragrid' ),
+			'sendgrid_list' => esc_html__( 'SendGrid List', 'gragrid' ),
 		);
 	}
 
@@ -438,7 +438,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 */
 	public function process_feed( $feed, $entry, $form ) {
 		if ( ! $this->init_api() ) {
-			$this->add_feed_error( esc_html__( 'Unable to process feed because API could not be initialized.', 'gravity-forms-sendgrid' ), $feed, $entry, $form );
+			$this->add_feed_error( esc_html__( 'Unable to process feed because API could not be initialized.', 'gragrid' ), $feed, $entry, $form );
 
 			return $entry;
 		}
@@ -456,7 +456,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 
 			if ( is_wp_error( $recipient ) ) {
 				// Translators: %s error message.
-				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to contact DB: %s', 'gravity-forms-sendgrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
+				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to contact DB: %s', 'gragrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
 			}
 
 			// Add recipient to contact list.
@@ -464,13 +464,13 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 
 			if ( is_wp_error( $recipient ) ) {
 				// Translators: %s error message.
-				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gravity-forms-sendgrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
+				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gragrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
 			}
 
 			return $entry;
 		} catch ( Exception $e ) {
 			// Translators: %s error message.
-			$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gravity-forms-sendgrid' ), $e->getMessage() ), $feed, $entry, $form );
+			$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gragrid' ), $e->getMessage() ), $feed, $entry, $form );
 
 			return $entry;
 		}
@@ -486,7 +486,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 	 * @uses GFAddOn::get_plugin_setting()
 	 * @uses GFAddOn::log_debug()
 	 * @uses GFAddOn::log_error()
-	 * @uses Gravity_Forms_SendGrid_API::valid_key()
+	 * @uses Gragrid_API::valid_key()
 	 *
 	 * @access public
 	 * @param string $api_key SendGrid API key.
@@ -510,7 +510,7 @@ class Gravity_Forms_SendGrid extends GFFeedAddOn {
 		$this->log_debug( __METHOD__ . '(): Validating API key.' );
 
 		try {
-			$this->api = new Gravity_Forms_SendGrid_API( $api_key );
+			$this->api = new Gragrid_API( $api_key );
 
 			if ( $this->api->valid_key() ) {
 				$this->log_debug( __METHOD__ . '(): SendGrid successfully authenticated.' );

@@ -1,21 +1,21 @@
 <?php
 /**
- * Gravity Forms: SendGrid Add-On
+ * Gragrid: Gravity Forms + SendGrid
  *
- * @package           Gravity_Forms_SendGrid
+ * @package           Gragrid
  * @author            Vladimir Contreras
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Gravity Forms: SendGrid Add-On
- * Plugin URI:        https://github.com/vlasscontreras/gravity-forms-sendgrid
+ * Plugin Name:       Gragrid: Gravity Forms + SendGrid
+ * Plugin URI:        https://github.com/vlasscontreras/gragrid
  * Description:       Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Vladimir Contreras
  * Author URI:        https://github.com/vlasscontreras
- * Text Domain:       gravity-forms-sendgrid
+ * Text Domain:       gragrid
  * Domain Path:       /languages
  * License:           GPL v2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -28,20 +28,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Current add-on version
  */
-define( 'GRAVITY_FORMS_SENDGRID_VERSION', '1.0.0' );
+define( 'GRAGRID_VERSION', '1.0.0' );
 
 /**
  * If the Feed Add-On Framework exists, SendGrid Add-On is loaded.
  *
  * @since 1.0.0
  */
-function gravity_forms_sendgrid_load() {
+function gragrid_load() {
 	if ( ! method_exists( 'GFForms', 'include_feed_addon_framework' ) ) {
 		return;
 	}
 
-	require_once 'class-gravity-forms-sendgrid.php';
+	require_once 'class-gragrid.php';
 
-	GFAddOn::register( 'Gravity_Forms_SendGrid' );
+	GFAddOn::register( 'Gragrid' );
 }
-add_action( 'gform_loaded', 'gravity_forms_sendgrid_load', 5 );
+add_action( 'gform_loaded', 'gragrid_load', 5 );
