@@ -4,7 +4,7 @@
  *
  * @since 1.0.0
  *
- * @package Gravity_Forms_SendGrid
+ * @package Gragrid
  * @author  Vladimir Contreras
  */
 
@@ -13,10 +13,10 @@
  *
  * @since 1.0.0
  *
- * @package Gravity_Forms_SendGrid
+ * @package Gragrid
  * @author  Vladimir Contreras
  */
-class Gravity_Forms_SendGrid_API {
+class Gragrid_API {
 	/**
 	 * SendGrid API key.
 	 *
@@ -140,7 +140,7 @@ class Gravity_Forms_SendGrid_API {
 	 */
 	private function request( $path = '', $data = array(), $method = 'GET' ) {
 		if ( rgblank( $this->api_key ) ) {
-			return new WP_Error( __METHOD__, __( 'API key must be defined to process an API request.', 'gravity-forms-sendgrid' ) );
+			return new WP_Error( __METHOD__, __( 'API key must be defined to process an API request.', 'gragrid' ) );
 		}
 
 		$request_url = 'https://api.sendgrid.com/v3' . $path;
@@ -174,7 +174,7 @@ class Gravity_Forms_SendGrid_API {
 		 * @param string $path The request path.
 		 * @return array
 		 */
-		$args = apply_filters( 'gravity_forms_sendgrid_request_args', $args, $path );
+		$args = apply_filters( 'gragrid_request_args', $args, $path );
 
 		// Execute request.
 		$response = wp_remote_request( $request_url, $args );
