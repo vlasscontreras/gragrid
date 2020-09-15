@@ -1,6 +1,6 @@
 === Gragrid: Gravity Forms + SendGrid ===
 Contributors: vlass
-Donate link: https://github.com/vlasscontreras/gragrid
+Donate link: https://wordpress.org/plugins/gragrid/
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
 Tested up to: 5.5.1
