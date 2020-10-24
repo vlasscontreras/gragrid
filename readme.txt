@@ -31,6 +31,15 @@ Yes. The official add-on and this plugin have different purposes and do not have
 
 Yes. Just like Gravity Forms' SendGrid add-on, this plugin serves a different purpose and does not conflict with it.
 
+== Advanced ==
+
+You can customize the SendGrid API requests using the following hook:
+
+`apply_filters( 'gragrid_request_args', array $args, string $path )`
+
+- `$args` (array): Request arguments, includes headers, method, body, etc.
+- `$path` (string): The specific API endpoint being called.
+
 == Screenshots ==
 
 1. Plugin settings page
