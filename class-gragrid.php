@@ -468,7 +468,19 @@ class Gragrid extends GFFeedAddOn {
 			if ( is_wp_error( $recipient ) ) {
 				// Translators: %s error message.
 				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gragrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
+
+				$this->add_note( $entry['id'], esc_html__( 'Gragrid could not pass the lead to SendGrid.', 'gragrid' ), 'error' );
 			}
+
+			$this->add_note(
+				$entry['id'],
+				sprintf(
+					// Translators: %s SendGrid list ID.
+					esc_html__( 'Gragrid successfully passed the lead details to the SendGrid list #%s.', 'gragrid' ),
+					rgars( $feed, 'meta/sendgrid_list' )
+				),
+				'success'
+			);
 
 			return $entry;
 		} catch ( Exception $e ) {
