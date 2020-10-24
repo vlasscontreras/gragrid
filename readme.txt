@@ -5,7 +5,7 @@ Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
 Tested up to: 5.5.1
 Requires PHP: 7.2
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,15 @@ Yes. The official add-on and this plugin have different purposes and do not have
 = Can this plugin be installed at the same time as the official SendGrid WordPress plugin? =
 
 Yes. Just like Gravity Forms' SendGrid add-on, this plugin serves a different purpose and does not conflict with it.
+
+== Advanced ==
+
+You can customize the SendGrid API requests using the following hook:
+
+`apply_filters( 'gragrid_request_args', array $args, string $path )`
+
+- `$args` (array): Request arguments, includes headers, method, body, etc.
+- `$path` (string): The specific API endpoint being called.
 
 == Screenshots ==
 

@@ -206,6 +206,7 @@ class Gragrid extends GFFeedAddOn {
 	 * Configures the settings which should be rendered on the feed edit page.
 	 *
 	 * @since 1.0.0
+	 * @since 1.1.0 Adds conditional feed setting.
 	 *
 	 * @access public
 	 * @return array
@@ -238,10 +239,6 @@ class Gragrid extends GFFeedAddOn {
 							esc_html__( 'Select the contact list you would like to add emails s to.', 'gragrid' )
 						),
 					),
-				),
-			),
-			array(
-				'fields' => array(
 					array(
 						'name'      => 'mappedFields',
 						'label'     => esc_html__( 'Map Fields', 'gragrid' ),
@@ -252,6 +249,13 @@ class Gragrid extends GFFeedAddOn {
 							esc_html__( 'Map Fields', 'gragrid' ),
 							esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gragrid' )
 						),
+					),
+					array(
+						'type'           => 'feed_condition',
+						'name'           => 'enabled',
+						'label'          => __( 'Conditional logic', 'gragrid' ),
+						'checkbox_label' => __( 'Enable', 'gragrid' ),
+						'instructions'   => __( 'Send this lead to SendGrid if', 'gragrid' ),
 					),
 					array( 'type' => 'save' ),
 				),
@@ -465,7 +469,19 @@ class Gragrid extends GFFeedAddOn {
 			if ( is_wp_error( $recipient ) ) {
 				// Translators: %s error message.
 				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gragrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
+
+				$this->add_note( $entry['id'], esc_html__( 'Gragrid could not pass the lead to SendGrid.', 'gragrid' ), 'error' );
 			}
+
+			$this->add_note(
+				$entry['id'],
+				sprintf(
+					// Translators: %s SendGrid list ID.
+					esc_html__( 'Gragrid successfully passed the lead details to the SendGrid list #%s.', 'gragrid' ),
+					rgars( $feed, 'meta/sendgrid_list' )
+				),
+				'success'
+			);
 
 			return $entry;
 		} catch ( Exception $e ) {
