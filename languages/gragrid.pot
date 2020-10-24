@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Gragrid: Gravity Forms + SendGrid 1.0.0\n"
+"Project-Id-Version: Gragrid: Gravity Forms + SendGrid 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gragrid\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-09-12T20:31:15+00:00\n"
+"POT-Creation-Date: 2020-10-24T21:38:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: gragrid\n"
@@ -47,80 +47,101 @@ msgstr ""
 msgid "SendGrid API Key"
 msgstr ""
 
-#: class-gragrid.php:216
+#: class-gragrid.php:217
 msgid "SendGrid Feed Settings"
 msgstr ""
 
-#: class-gragrid.php:220
-#: class-gragrid.php:226
-#: class-gragrid.php:399
+#: class-gragrid.php:221
+#: class-gragrid.php:227
+#: class-gragrid.php:403
 msgid "Name"
 msgstr ""
 
-#: class-gragrid.php:227
+#: class-gragrid.php:228
 msgid "Enter a feed name to uniquely identify this setup."
 msgstr ""
 
-#: class-gragrid.php:232
-#: class-gragrid.php:237
+#: class-gragrid.php:233
+#: class-gragrid.php:238
 msgid "SendGrid Contact List"
 msgstr ""
 
-#: class-gragrid.php:238
+#: class-gragrid.php:239
 msgid "Select the contact list you would like to add emails s to."
 msgstr ""
 
-#: class-gragrid.php:247
-#: class-gragrid.php:252
+#: class-gragrid.php:244
+#: class-gragrid.php:249
 msgid "Map Fields"
 msgstr ""
 
-#: class-gragrid.php:253
+#: class-gragrid.php:250
 msgid "Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list."
 msgstr ""
 
+#: class-gragrid.php:256
+msgid "Conditional logic"
+msgstr ""
+
+#: class-gragrid.php:257
+msgid "Enable"
+msgstr ""
+
+#: class-gragrid.php:258
+msgid "Send this lead to SendGrid if"
+msgstr ""
+
 #. Translators: 1 line break, 2 error message.
-#: class-gragrid.php:288
+#: class-gragrid.php:292
 msgid "Could not load the contact lists. %1$sError: %2$s"
 msgstr ""
 
-#: class-gragrid.php:299
+#: class-gragrid.php:303
 msgid "You don't have contact lists in your account. Please create one first and try again."
 msgstr ""
 
-#: class-gragrid.php:307
+#: class-gragrid.php:311
 msgid "Select a SendGrid list"
 msgstr ""
 
-#: class-gragrid.php:346
+#: class-gragrid.php:350
 msgid "Email Address"
 msgstr ""
 
-#: class-gragrid.php:352
+#: class-gragrid.php:356
 msgid "First Name"
 msgstr ""
 
-#: class-gragrid.php:358
+#: class-gragrid.php:362
 msgid "Last Name"
 msgstr ""
 
-#: class-gragrid.php:400
+#: class-gragrid.php:404
 msgid "SendGrid List"
 msgstr ""
 
-#: class-gragrid.php:441
+#: class-gragrid.php:445
 msgid "Unable to process feed because API could not be initialized."
 msgstr ""
 
 #. Translators: %s error message.
-#: class-gragrid.php:459
+#: class-gragrid.php:463
 msgid "Unable to add recipient to contact DB: %s"
 msgstr ""
 
 #. Translators: %s error message.
-#: class-gragrid.php:467
-#: class-gragrid.php:473
+#: class-gragrid.php:471
+#: class-gragrid.php:489
 msgid "Unable to add recipient to list: %s"
+msgstr ""
+
+#: class-gragrid.php:473
+msgid "Gragrid could not pass the lead to SendGrid."
+msgstr ""
+
+#. Translators: %s SendGrid list ID.
+#: class-gragrid.php:480
+msgid "Gragrid successfully passed the lead details to the SendGrid list #%s."
 msgstr ""
 
 #: includes/class-gragrid-api.php:143
