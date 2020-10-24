@@ -48,5 +48,9 @@ You can customize the SendGrid API requests using the following hook:
 
 == Changelog ==
 
-= 1.0 =
+= 1.1.0 =
+* Adds support for conditional feeds
+* Adds notes to form entries when the feeds are processed
+
+= 1.0.0 =
 * Initial release
