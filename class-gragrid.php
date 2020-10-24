@@ -238,10 +238,6 @@ class Gragrid extends GFFeedAddOn {
 							esc_html__( 'Select the contact list you would like to add emails s to.', 'gragrid' )
 						),
 					),
-				),
-			),
-			array(
-				'fields' => array(
 					array(
 						'name'      => 'mappedFields',
 						'label'     => esc_html__( 'Map Fields', 'gragrid' ),
@@ -252,6 +248,13 @@ class Gragrid extends GFFeedAddOn {
 							esc_html__( 'Map Fields', 'gragrid' ),
 							esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gragrid' )
 						),
+					),
+					array(
+						'type'           => 'feed_condition',
+						'name'           => 'enabled',
+						'label'          => __( 'Conditional logic', 'gragrid' ),
+						'checkbox_label' => __( 'Enable', 'gragrid' ),
+						'instructions'   => __( 'Send this lead to SendGrid if', 'gragrid' ),
 					),
 					array( 'type' => 'save' ),
 				),
