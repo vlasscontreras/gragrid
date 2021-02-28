@@ -297,7 +297,7 @@ class Gragrid extends GFFeedAddOn {
 			return;
 		}
 
-		if ( ! count( $lists['lists'] ) > 0 ) {
+		if ( ! count( $lists['result'] ) > 0 ) {
 			$this->log_error( __METHOD__ . ': API retured empty set of lists.' );
 
 			printf( esc_html__( 'You don\'t have contact lists in your account. Please create one first and try again.', 'gragrid' ) );
@@ -313,9 +313,9 @@ class Gragrid extends GFFeedAddOn {
 			),
 		);
 
-		foreach ( $lists['lists'] as $list ) {
+		foreach ( $lists['result'] as $list ) {
 			$options[] = array(
-				'label' => esc_html( $list['name'] . ' (' . $list['recipient_count'] . ')' ),
+				'label' => esc_html( $list['name'] . ' (' . $list['contact_count'] . ')' ),
 				'value' => esc_attr( $list['id'] ),
 			);
 
@@ -447,30 +447,28 @@ class Gragrid extends GFFeedAddOn {
 			return $entry;
 		}
 
-		$fields     = $this->get_field_map_fields( $feed, 'mappedFields' );
-		$merge_vars = array_fill_keys( array_keys( $this->sengrid_field_map() ), null );
+		$fields  = $this->get_field_map_fields( $feed, 'mappedFields' );
+		$contact = array();
 
 		foreach ( $fields as $name => $field_id ) {
-			$merge_vars[ $name ] = $this->get_field_value( $form, $entry, $field_id );
+			$contact[ $name ] = $this->get_field_value( $form, $entry, $field_id );
 		}
 
+		$contact_params = array(
+			'list_ids' => array( rgars( $feed, 'meta/sendgrid_list' ) ),
+			'contacts' => array( $contact ),
+		);
+
 		try {
-			// Save recipient to contact DB.
-			$recipient = $this->api->add_recipient( $merge_vars );
+			// Save the contacts.
+			$response = $this->api->add_contacts( $contact_params );
 
-			if ( is_wp_error( $recipient ) ) {
+			if ( is_wp_error( $response ) ) {
 				// Translators: %s error message.
-				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to contact DB: %s', 'gragrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
-			}
+				$this->add_feed_error( sprintf( esc_html__( 'Unable to add the contact: %s', 'gragrid' ), $response->get_error_message() ), $feed, $entry, $form );
+				$this->add_feed_error( print_r( $response->get_error_message(), true ), $feed, $entry, $form );
 
-			// Add recipient to contact list.
-			$recipient = $this->api->add_list_recipient( rgars( $feed, 'meta/sendgrid_list' ), $recipient['persisted_recipients'][0] );
-
-			if ( is_wp_error( $recipient ) ) {
-				// Translators: %s error message.
-				$this->add_feed_error( sprintf( esc_html__( 'Unable to add recipient to list: %s', 'gragrid' ), $recipient->get_error_message() ), $feed, $entry, $form );
-
-				$this->add_note( $entry['id'], esc_html__( 'Gragrid could not pass the lead to SendGrid.', 'gragrid' ), 'error' );
+				return $entry;
 			}
 
 			$this->add_note(
