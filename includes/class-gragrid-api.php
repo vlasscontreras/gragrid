@@ -48,7 +48,7 @@ class Gragrid_API {
 	 * @return array|WP_Error
 	 */
 	public function get_lists() {
-		$response = $this->request( '/contactdb/lists' );
+		$response = $this->request( '/marketing/lists' );
 
 		if ( ! $this->is_valid_response( $response, 200 ) ) {
 			return $this->set_error( $response );
@@ -67,7 +67,7 @@ class Gragrid_API {
 	 * @return array|WP_Error
 	 */
 	public function get_list( $list_id ) {
-		$response = $this->request( '/contactdb/lists/' . $list_id );
+		$response = $this->request( '/marketing/lists/' . $list_id );
 
 		if ( ! $this->is_valid_response( $response, 200 ) ) {
 			return $this->set_error( $response );
@@ -77,39 +77,18 @@ class Gragrid_API {
 	}
 
 	/**
-	 * Add new recipient.
+	 * Add new contacts.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 *
 	 * @access public
 	 * @param array $params Request parameters.
 	 * @return array|WP_Error
 	 */
-	public function add_recipient( $params ) {
-		$params   = array( $params );
-		$response = $this->request( '/contactdb/recipients', $params, 'POST' );
+	public function add_contacts( $params ) {
+		$response = $this->request( '/marketing/contacts', $params, 'PUT' );
 
-		if ( ! $this->is_valid_response( $response, 201 ) ) {
-			return $this->set_error( $response );
-		}
-
-		return $response['body'];
-	}
-
-	/**
-	 * Add new recipient to contact list.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 * @param array $list_id      Contact list ID.
-	 * @param array $recipient_id Recipient ID.
-	 * @return array|WP_Error
-	 */
-	public function add_list_recipient( $list_id, $recipient_id ) {
-		$response = $this->request( '/contactdb/lists/' . $list_id . '/recipients/' . $recipient_id, null, 'POST' );
-
-		if ( ! $this->is_valid_response( $response, 201 ) ) {
+		if ( ! $this->is_valid_response( $response, 202 ) ) {
 			return $this->set_error( $response );
 		}
 

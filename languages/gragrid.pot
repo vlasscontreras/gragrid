@@ -1,17 +1,17 @@
-# Copyright (C) 2020 Vladimir Contreras
+# Copyright (C) 2021 Vladimir Contreras
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Gragrid: Gravity Forms + SendGrid 1.1.0\n"
+"Project-Id-Version: Gragrid: Gravity Forms + SendGrid 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gragrid\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-10-24T21:38:31+00:00\n"
+"POT-Creation-Date: 2021-02-28T18:42:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: WP-CLI 2.1.0\n"
 "X-Domain: gragrid\n"
 
 #. Plugin Name of the plugin
@@ -53,7 +53,7 @@ msgstr ""
 
 #: class-gragrid.php:221
 #: class-gragrid.php:227
-#: class-gragrid.php:403
+#: class-gragrid.php:439
 msgid "Name"
 msgstr ""
 
@@ -116,34 +116,53 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: class-gragrid.php:404
+#: class-gragrid.php:368
+msgid "Address Line 1"
+msgstr ""
+
+#: class-gragrid.php:374
+msgid "Address Line 2"
+msgstr ""
+
+#: class-gragrid.php:380
+msgid "City"
+msgstr ""
+
+#: class-gragrid.php:386
+msgid "State/Province/Region"
+msgstr ""
+
+#: class-gragrid.php:392
+msgid "Postal Code"
+msgstr ""
+
+#: class-gragrid.php:398
+msgid "Country"
+msgstr ""
+
+#: class-gragrid.php:440
 msgid "SendGrid List"
 msgstr ""
 
-#: class-gragrid.php:445
+#: class-gragrid.php:481
 msgid "Unable to process feed because API could not be initialized."
 msgstr ""
 
 #. Translators: %s error message.
-#: class-gragrid.php:463
-msgid "Unable to add recipient to contact DB: %s"
-msgstr ""
-
-#. Translators: %s error message.
-#: class-gragrid.php:471
-#: class-gragrid.php:489
-msgid "Unable to add recipient to list: %s"
-msgstr ""
-
-#: class-gragrid.php:473
-msgid "Gragrid could not pass the lead to SendGrid."
+#: class-gragrid.php:504
+msgid "Unable to add the contact: %s"
 msgstr ""
 
 #. Translators: %s SendGrid list ID.
-#: class-gragrid.php:480
+#: class-gragrid.php:513
 msgid "Gragrid successfully passed the lead details to the SendGrid list #%s."
 msgstr ""
 
-#: includes/class-gragrid-api.php:143
+#. Translators: %s error message.
+#: class-gragrid.php:522
+msgid "Unable to add recipient to list: %s"
+msgstr ""
+
+#: includes/class-gragrid-api.php:122
 msgid "API key must be defined to process an API request."
 msgstr ""

@@ -1,11 +1,11 @@
 === Gragrid: Gravity Forms + SendGrid ===
 Contributors: vlass
-Donate link: https://wordpress.org/plugins/gragrid/
+Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.5.1
-Requires PHP: 7.2
-Stable tag: 1.1.0
+Tested up to: 5.6.2
+Requires PHP: 7.3
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,11 @@ You can customize the SendGrid API requests using the following hook:
 3. Feed settings page
 
 == Changelog ==
+
+= 2.0.0 =
+* Uses Twilio SendGrid's new Marketing Campaigns API (see [#9](https://github.com/vlasscontreras/gragrid/issues/9))
+* Adds address fields to map them to SendGrid Contacts
+* New logo 🎨
 
 = 1.1.0 =
 * Adds support for conditional feeds
