@@ -96,26 +96,6 @@ class Gragrid_API {
 	}
 
 	/**
-	 * Add new recipient to contact list.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 * @param array $list_id      Contact list ID.
-	 * @param array $recipient_id Recipient ID.
-	 * @return array|WP_Error
-	 */
-	public function add_list_recipient( $list_id, $recipient_id ) {
-		$response = $this->request( '/contactdb/lists/' . $list_id . '/recipients/' . $recipient_id, null, 'POST' );
-
-		if ( ! $this->is_valid_response( $response, 201 ) ) {
-			return $this->set_error( $response );
-		}
-
-		return $response['body'];
-	}
-
-	/**
 	 * Validate the API key
 	 *
 	 * @since 1.0.0
