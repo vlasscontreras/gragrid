@@ -85,7 +85,7 @@ class Gragrid_API {
 	 * @param array $params Request parameters.
 	 * @return array|WP_Error
 	 */
-	public function add_contacts( array $params ) {
+	public function add_contacts( $params ) {
 		$response = $this->request( '/marketing/contacts', $params, 'PUT' );
 
 		if ( ! $this->is_valid_response( $response, 202 ) ) {
