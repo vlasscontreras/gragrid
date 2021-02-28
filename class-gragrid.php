@@ -502,7 +502,6 @@ class Gragrid extends GFFeedAddOn {
 			if ( is_wp_error( $response ) ) {
 				// Translators: %s error message.
 				$this->add_feed_error( sprintf( esc_html__( 'Unable to add the contact: %s', 'gragrid' ), $response->get_error_message() ), $feed, $entry, $form );
-				$this->add_feed_error( print_r( $response->get_error_message(), true ), $feed, $entry, $form );
 
 				return $entry;
 			}
