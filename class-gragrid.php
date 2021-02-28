@@ -345,23 +345,59 @@ class Gragrid extends GFFeedAddOn {
 	 */
 	public function sengrid_field_map() {
 		return array(
-			'email'      => array(
+			'email'                 => array(
 				'name'       => 'email',
 				'label'      => esc_html__( 'Email Address', 'gragrid' ),
 				'required'   => true,
 				'field_type' => array( 'email', 'hidden' ),
 			),
-			'first_name' => array(
+			'first_name'            => array(
 				'name'       => 'first_name',
 				'label'      => esc_html__( 'First Name', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
 			),
-			'last_name'  => array(
+			'last_name'             => array(
 				'name'       => 'last_name',
 				'label'      => esc_html__( 'Last Name', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
+			),
+			'address_line_1'        => array(
+				'name'       => 'address_line_1',
+				'label'      => esc_html__( 'Address Line 1', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'address', 'text', 'hidden' ),
+			),
+			'address_line_2'        => array(
+				'name'       => 'address_line_2',
+				'label'      => esc_html__( 'Address Line 2', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'address', 'text', 'hidden' ),
+			),
+			'city'                  => array(
+				'name'       => 'city',
+				'label'      => esc_html__( 'City', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'address', 'text', 'hidden' ),
+			),
+			'state_province_region' => array(
+				'name'       => 'state_province_region',
+				'label'      => esc_html__( 'State/Province/Region', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'address', 'text', 'hidden' ),
+			),
+			'postal_code'           => array(
+				'name'       => 'postal_code',
+				'label'      => esc_html__( 'Postal Code', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'address', 'text', 'hidden' ),
+			),
+			'country'               => array(
+				'name'       => 'country',
+				'label'      => esc_html__( 'Country', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'address', 'text', 'hidden' ),
 			),
 		);
 	}
