@@ -3,7 +3,7 @@ Contributors: vlass
 Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.6.2
+Tested up to: 5.7
 Requires PHP: 7.3
 Stable tag: 2.0.0
 License: GPLv2 or later
@@ -22,6 +22,18 @@ Integrate your Gravity Forms with SendGrid to send submissions with email fields
 3. Go to Forms > Settings > SendGrid and add your API key
 
 == Frequently Asked Questions ==
+
+= Why the field dropdowns in the mapping settings are empty? =
+
+To map:
+
+* The **Email** you need to have a field of type [Email](https://docs.gravityforms.com/email/) or [Hidden](https://docs.gravityforms.com/hidden/).
+* The **First Name** and **Last Name** you need to have a field of type [Name](https://docs.gravityforms.com/name/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
+* The **Address** you need to have a field of type [Address](https://docs.gravityforms.com/address-field/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
+
+= The field dropdown options in the mapping settings are blank but selectable, what's going on? =
+
+The field dropdowns show the [Field Label](https://docs.gravityforms.com/common-field-settings/#field-label) or [Admin Field Label](https://docs.gravityforms.com/common-field-settings/#admin-field-label), so make sure you have either of those set up in your fields. Or both, it's also a good practice for accessibility!
 
 = Can this plugin be installed at the same time as the official SendGrid Gravity Forms add-on? =
 

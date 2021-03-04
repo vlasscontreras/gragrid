@@ -12,7 +12,7 @@
  * Description:       Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.
  * Version:           2.0.0
  * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Requires PHP:      7.3
  * Author:            Vladimir Contreras
  * Author URI:        https://github.com/vlasscontreras
  * Text Domain:       gragrid
