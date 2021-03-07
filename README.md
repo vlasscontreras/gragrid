@@ -2,8 +2,11 @@
 
 [![GitHub Workflows](https://github.com/vlasscontreras/gragrid/workflows/Build/badge.svg)](https://github.com/vlasscontreras/gragrid)
 [![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/vlasscontreras/gragrid)
-[![WordPress Plugin: Required WP Version](https://img.shields.io/badge/wordpress-v5.2-blue)](https://github.com/vlasscontreras/gragrid)
-[![WordPress Plugin: Tested WP Version](https://img.shields.io/badge/wordpress-v5.7%20tested-brightgreen)](https://github.com/vlasscontreras/gragrid)
+[![Plugin Version](https://img.shields.io/wordpress/plugin/v/gragrid)](https://wordpress.org/plugins/gragrid/)
+[![PHP Version](https://img.shields.io/wordpress/plugin/required-php/gragrid)](https://github.com/vlasscontreras/gragrid)
+[![WordPress Plugin: Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/gragrid)](https://github.com/vlasscontreras/gragrid)
+[![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/gragrid)](https://github.com/vlasscontreras/gragrid)
+[![WordPress Plugin: Downloads](https://img.shields.io/wordpress/plugin/dt/gragrid)](https://wordpress.org/plugins/gragrid/)
 
 Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.
 
