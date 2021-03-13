@@ -339,6 +339,8 @@ class Gragrid extends GFFeedAddOn {
 	 * Return an array of SendGrid list/audience fields which can be mapped to the Form fields/entry meta.
 	 *
 	 * @since 1.0.0
+	 * @since 2.0.0 Added address fields.
+	 * @since 2.1.0 Added more default SendGrid fields.
 	 *
 	 * @access public
 	 * @return array
@@ -362,6 +364,12 @@ class Gragrid extends GFFeedAddOn {
 				'label'      => esc_html__( 'Last Name', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
+			),
+			'phone_number'          => array(
+				'name'       => 'phone_number',
+				'label'      => esc_html__( 'Phone Number', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'phone', 'text', 'hidden' ),
 			),
 			'address_line_1'        => array(
 				'name'       => 'address_line_1',
@@ -398,6 +406,30 @@ class Gragrid extends GFFeedAddOn {
 				'label'      => esc_html__( 'Country', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'address', 'text', 'hidden' ),
+			),
+			'whatsapp'              => array(
+				'name'       => 'whatsapp',
+				'label'      => esc_html__( 'WhatsApp', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'phone', 'text', 'hidden' ),
+			),
+			'line'                  => array(
+				'name'       => 'line',
+				'label'      => esc_html__( 'Line', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'phone', 'text', 'hidden' ),
+			),
+			'facebook'              => array(
+				'name'       => 'facebook',
+				'label'      => esc_html__( 'Facebook', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'website', 'text', 'hidden' ),
+			),
+			'unique_name'           => array(
+				'name'       => 'unique_name',
+				'label'      => esc_html__( 'Unique Name', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'name', 'text', 'hidden' ),
 			),
 		);
 	}
