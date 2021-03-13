@@ -35,6 +35,10 @@ To map:
 
 The field dropdowns show the [Field Label](https://docs.gravityforms.com/common-field-settings/#field-label) or [Admin Field Label](https://docs.gravityforms.com/common-field-settings/#admin-field-label), so make sure you have either of those set up in your fields. Or both, it's also a good practice for accessibility!
 
+= Why I don't see any custom fields in the form settings? =
+
+The custom field mapping won't appear unless you have at least 1 custom field in your SendGrid account, so make sure you have at least one.
+
 = Can this plugin be installed at the same time as the official SendGrid Gravity Forms add-on? =
 
 Yes. The official add-on and this plugin have different purposes and do not have conflicts in between.
@@ -45,7 +49,15 @@ Yes. Just like Gravity Forms' SendGrid add-on, this plugin serves a different pu
 
 == Advanced ==
 
-You can customize the SendGrid API requests using the following hook:
+You can customize the contact data sent to SendGrid in the entry submission context with this hook:
+
+`apply_filters( 'gragrid_contact_params', array $contact_params, array $entry, array $form )`
+
+- `$contact_params` (array): Contact parameters, includes first name, email, custom fields, etc.
+- `$entry` (array): The form entry that was just created.
+- `$form` (array): The current form, the origin of the submission.
+
+You can also customize the SendGrid API requests using the following hook:
 
 `apply_filters( 'gragrid_request_args', array $args, string $path )`
 
