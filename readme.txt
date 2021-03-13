@@ -72,10 +72,15 @@ You can also customize the SendGrid API requests using the following hook:
 
 == Changelog ==
 
+= 2.1.0 =
+* Adds support to map more reserved/default SendGrid fields
+* Adds support to map custom fields 🥳
+* Introduces a new filter hook `gragrid_contact_params` to filter contact data at entry context
+
 = 2.0.0 =
 * Uses Twilio SendGrid's new Marketing Campaigns API (see [#9](https://github.com/vlasscontreras/gragrid/issues/9))
 * Adds address fields to map them to SendGrid Contacts
-* New logo 🎨
+* New logo 💅🏻
 
 = 1.1.0 =
 * Adds support for conditional feeds
