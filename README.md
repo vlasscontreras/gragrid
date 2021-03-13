@@ -1,7 +1,7 @@
 # Gragrid: Gravity Forms + SendGrid
 
 [![GitHub Workflows](https://github.com/vlasscontreras/gragrid/workflows/Build/badge.svg)](https://github.com/vlasscontreras/gragrid)
-[![Version](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)](https://github.com/vlasscontreras/gragrid)
+[![Version](https://img.shields.io/badge/version-2.1.0-brightgreen.svg)](https://github.com/vlasscontreras/gragrid)
 [![Plugin Version](https://img.shields.io/wordpress/plugin/v/gragrid)](https://wordpress.org/plugins/gragrid/)
 [![PHP Version](https://img.shields.io/wordpress/plugin/required-php/gragrid)](https://github.com/vlasscontreras/gragrid)
 [![WordPress Plugin: Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/gragrid)](https://github.com/vlasscontreras/gragrid)
