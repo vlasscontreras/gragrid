@@ -77,6 +77,24 @@ class Gragrid_API {
 	}
 
 	/**
+	 * Get SendGrid custom fields.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @access public
+	 * @return array|WP_Error
+	 */
+	public function get_custom_fields() {
+		$response = $this->request( '/marketing/field_definitions' );
+
+		if ( ! $this->is_valid_response( $response, 200 ) ) {
+			return $this->set_error( $response );
+		}
+
+		return $response['body'];
+	}
+
+	/**
 	 * Add new contacts.
 	 *
 	 * @since 2.0.0

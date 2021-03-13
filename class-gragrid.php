@@ -12,6 +12,8 @@
 
 GFForms::include_feed_addon_framework();
 
+require_once 'includes/concerns/class-gragrid-converts-case.php';
+
 /**
  * The SendGrid Add-on Class
  *
@@ -19,6 +21,8 @@ GFForms::include_feed_addon_framework();
  * @author  Vladimir Contreras
  */
 class Gragrid extends GFFeedAddOn {
+	use Gragrid_Converts_Case;
+
 	/**
 	 * Contains an instance of this class, if available.
 	 *
@@ -206,59 +210,82 @@ class Gragrid extends GFFeedAddOn {
 	 * Configures the settings which should be rendered on the feed edit page.
 	 *
 	 * @since 1.0.0
-	 * @since 1.1.0 Adds conditional feed setting.
+	 * @since 1.1.0 Added conditional feed setting.
+	 * @since 2.1.0 Added custom field mapping.
 	 *
 	 * @access public
 	 * @return array
 	 */
 	public function feed_settings_fields() {
+		$custom_fields    = $this->sengrid_custom_fields_map();
+		$custom_field_map = null;
+
+		if ( ! count( $custom_fields ) > 0 ) {
+			$this->log_error( __METHOD__ . ': API retured empty set of custom fields.' );
+		} else {
+			$custom_field_map = array(
+				'name'      => 'mappedCustomFields',
+				'label'     => esc_html__( 'Custom Fields', 'gragrid' ),
+				'type'      => 'field_map',
+				'field_map' => $custom_fields,
+				'tooltip'   => sprintf(
+					'<h6>%s</h6>%s',
+					esc_html__( 'Custom Fields', 'gragrid' ),
+					esc_html__( 'Associate your custom SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gragrid' )
+				),
+			);
+		}
+
+		$fields = array(
+			array(
+				'name'     => 'feedName',
+				'label'    => esc_html__( 'Name', 'gragrid' ),
+				'type'     => 'text',
+				'required' => true,
+				'class'    => 'medium',
+				'tooltip'  => sprintf(
+					'<h6>%s</h6>%s',
+					esc_html__( 'Name', 'gragrid' ),
+					esc_html__( 'Enter a feed name to uniquely identify this setup.', 'gragrid' )
+				),
+			),
+			array(
+				'name'     => 'sendgrid_list',
+				'label'    => esc_html__( 'SendGrid Contact List', 'gragrid' ),
+				'type'     => 'sendgrid_list',
+				'required' => true,
+				'tooltip'  => sprintf(
+					'<h6>%s</h6>%s',
+					esc_html__( 'SendGrid Contact List', 'gragrid' ),
+					esc_html__( 'Select the contact list you would like to add emails s to.', 'gragrid' )
+				),
+			),
+			array(
+				'name'      => 'mappedFields',
+				'label'     => esc_html__( 'Map Fields', 'gragrid' ),
+				'type'      => 'field_map',
+				'field_map' => $this->sengrid_field_map(),
+				'tooltip'   => sprintf(
+					'<h6>%s</h6>%s',
+					esc_html__( 'Map Fields', 'gragrid' ),
+					esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gragrid' )
+				),
+			),
+			$custom_field_map,
+			array(
+				'type'           => 'feed_condition',
+				'name'           => 'enabled',
+				'label'          => __( 'Conditional logic', 'gragrid' ),
+				'checkbox_label' => __( 'Enable', 'gragrid' ),
+				'instructions'   => __( 'Send this lead to SendGrid if', 'gragrid' ),
+			),
+			array( 'type' => 'save' ),
+		);
+
 		$settings = array(
 			array(
 				'title'  => esc_html__( 'SendGrid Feed Settings', 'gragrid' ),
-				'fields' => array(
-					array(
-						'name'     => 'feedName',
-						'label'    => esc_html__( 'Name', 'gragrid' ),
-						'type'     => 'text',
-						'required' => true,
-						'class'    => 'medium',
-						'tooltip'  => sprintf(
-							'<h6>%s</h6>%s',
-							esc_html__( 'Name', 'gragrid' ),
-							esc_html__( 'Enter a feed name to uniquely identify this setup.', 'gragrid' )
-						),
-					),
-					array(
-						'name'     => 'sendgrid_list',
-						'label'    => esc_html__( 'SendGrid Contact List', 'gragrid' ),
-						'type'     => 'sendgrid_list',
-						'required' => true,
-						'tooltip'  => sprintf(
-							'<h6>%s</h6>%s',
-							esc_html__( 'SendGrid Contact List', 'gragrid' ),
-							esc_html__( 'Select the contact list you would like to add emails s to.', 'gragrid' )
-						),
-					),
-					array(
-						'name'      => 'mappedFields',
-						'label'     => esc_html__( 'Map Fields', 'gragrid' ),
-						'type'      => 'field_map',
-						'field_map' => $this->sengrid_field_map(),
-						'tooltip'   => sprintf(
-							'<h6>%s</h6>%s',
-							esc_html__( 'Map Fields', 'gragrid' ),
-							esc_html__( 'Associate the SendGrid fields to the appropriate Gravity Form fields by selecting the appropriate form field from the list.', 'gragrid' )
-						),
-					),
-					array(
-						'type'           => 'feed_condition',
-						'name'           => 'enabled',
-						'label'          => __( 'Conditional logic', 'gragrid' ),
-						'checkbox_label' => __( 'Enable', 'gragrid' ),
-						'instructions'   => __( 'Send this lead to SendGrid if', 'gragrid' ),
-					),
-					array( 'type' => 'save' ),
-				),
+				'fields' => array_filter( $fields ),
 			),
 		);
 
@@ -339,6 +366,8 @@ class Gragrid extends GFFeedAddOn {
 	 * Return an array of SendGrid list/audience fields which can be mapped to the Form fields/entry meta.
 	 *
 	 * @since 1.0.0
+	 * @since 2.0.0 Added address fields.
+	 * @since 2.1.0 Added more default SendGrid fields.
 	 *
 	 * @access public
 	 * @return array
@@ -362,6 +391,12 @@ class Gragrid extends GFFeedAddOn {
 				'label'      => esc_html__( 'Last Name', 'gragrid' ),
 				'required'   => false,
 				'field_type' => array( 'name', 'text', 'hidden' ),
+			),
+			'phone_number'          => array(
+				'name'       => 'phone_number',
+				'label'      => esc_html__( 'Phone Number', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'phone', 'text', 'hidden' ),
 			),
 			'address_line_1'        => array(
 				'name'       => 'address_line_1',
@@ -399,7 +434,54 @@ class Gragrid extends GFFeedAddOn {
 				'required'   => false,
 				'field_type' => array( 'address', 'text', 'hidden' ),
 			),
+			'whatsapp'              => array(
+				'name'       => 'whatsapp',
+				'label'      => esc_html__( 'WhatsApp', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'phone', 'text', 'hidden' ),
+			),
+			'line'                  => array(
+				'name'       => 'line',
+				'label'      => esc_html__( 'Line', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'phone', 'text', 'hidden' ),
+			),
+			'facebook'              => array(
+				'name'       => 'facebook',
+				'label'      => esc_html__( 'Facebook', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'website', 'text', 'hidden' ),
+			),
+			'unique_name'           => array(
+				'name'       => 'unique_name',
+				'label'      => esc_html__( 'Unique Name', 'gragrid' ),
+				'required'   => false,
+				'field_type' => array( 'name', 'text', 'hidden' ),
+			),
 		);
+	}
+
+	/**
+	 * Map custom SendGrid fields
+	 *
+	 * @since 2.1.0
+	 *
+	 * @return array
+	 */
+	public function sengrid_custom_fields_map() {
+		$fields        = array();
+		$custom_fields = (array) rgar( $this->api->get_custom_fields(), 'custom_fields' );
+		$custom_fields = array_filter( $custom_fields );
+
+		foreach ( $custom_fields as $custom_field ) {
+			$fields[ $custom_field['id'] ] = array(
+				'name'     => $custom_field['id'],
+				'label'    => $this->snake_to_title( $custom_field['name'] ),
+				'required' => false,
+			);
+		}
+
+		return $fields;
 	}
 
 	/**
@@ -470,10 +552,12 @@ class Gragrid extends GFFeedAddOn {
 	/**
 	 * Process the feed e.g. subscribe the user to a list.
 	 *
+	 * @since 1.0.0
+	 * @since 2.1.0 Added custom fields to the request data.
+	 *
 	 * @param array $feed The feed object to be processed.
 	 * @param array $entry The entry object currently being processed.
 	 * @param array $form The form object currently being processed.
-	 *
 	 * @return bool|void
 	 */
 	public function process_feed( $feed, $entry, $form ) {
@@ -483,17 +567,37 @@ class Gragrid extends GFFeedAddOn {
 			return $entry;
 		}
 
-		$fields  = $this->get_field_map_fields( $feed, 'mappedFields' );
 		$contact = array();
+
+		// Map reserved/standard/default fields.
+		$fields = $this->get_field_map_fields( $feed, 'mappedFields' );
 
 		foreach ( $fields as $name => $field_id ) {
 			$contact[ $name ] = $this->get_field_value( $form, $entry, $field_id );
+		}
+
+		// Map custom fields.
+		$custom_fields = $this->get_field_map_fields( $feed, 'mappedCustomFields' );
+
+		foreach ( $custom_fields as $name => $field_id ) {
+			$contact['custom_fields'][ $name ] = $this->get_field_value( $form, $entry, $field_id );
 		}
 
 		$contact_params = array(
 			'list_ids' => array( rgars( $feed, 'meta/sendgrid_list' ) ),
 			'contacts' => array( $contact ),
 		);
+
+		/**
+		 * Contact parameters
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param array $contact_params Contact parameters.
+		 * @param array $entry          The entry object currently being processed.
+		 * @param array $form           The form object currently being processed.
+		 */
+		$contact_params = apply_filters( 'gragrid_contact_params', $contact_params, $entry, $form );
 
 		try {
 			// Save the contacts.
