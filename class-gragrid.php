@@ -495,6 +495,17 @@ class Gragrid extends GFFeedAddOn {
 			'contacts' => array( $contact ),
 		);
 
+		/**
+		 * Contact parameters
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param array $contact_params Contact parameters.
+		 * @param array $entry          The entry object currently being processed.
+		 * @param array $form           The form object currently being processed.
+		 */
+		$contact_params = apply_filters( 'gragrid_contact_params', $contact_params, $entry, $form );
+
 		try {
 			// Save the contacts.
 			$response = $this->api->add_contacts( $contact_params );
