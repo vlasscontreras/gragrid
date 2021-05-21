@@ -29,7 +29,7 @@
     "scripts": {
         "lint:wpcs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
         "lint:php": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vendor .",
-        "make-pot": "wp i18n make-pot . languages/gragrid.pot"
+        "make:pot": "wp i18n make-pot . languages/gragrid.pot"
     },
     "support": {
         "issues": "https://github.com/vlasscontreras/gragrid/issues",

@@ -119,9 +119,9 @@ class Gragrid extends GFFeedAddOn {
 	 * @since 1.0.0
 	 *
 	 * @access protected
-	 * @var    Gragrid_API $api Contains an instance of the SendGrid API library.
+	 * @var    Gragrid_API|null $api Contains an instance of the SendGrid API library.
 	 */
-	public $api = null;
+	protected $api = null;
 
 	/**
 	 * Add-on constructor
@@ -307,21 +307,15 @@ class Gragrid extends GFFeedAddOn {
 			return;
 		}
 
-		try {
-			$this->log_debug( __METHOD__ . '(): Retrieving contact lists.' );
+		$lists = $this->api->get_lists();
 
-			$lists = $this->api->get_lists();
-		} catch ( Exception $e ) {
-			$this->log_error( __METHOD__ . ': Could not retrieve the contact lists ' . $e->getMessage() );
+		if ( is_wp_error( $lists ) ) {
+			$this->log_error( __METHOD__ . ': Could not retrieve the contact lists ' . $lists->get_error_message() );
 
-			printf(
-				// Translators: 1 line break, 2 error message.
-				esc_html__( 'Could not load the contact lists. %1$sError: %2$s', 'gragrid' ),
-				'<br/>',
-				$e->getMessage()
-			); // phpcs:ignore: XSS ok.
-
-			return;
+			return sprintf(
+				'<div class="notice notice-error inline" style="display: block !important;"><p>%s</p></div>',
+				esc_html__( 'Could not load the contact lists. Make sure you have a valid API key.', 'gragrid' )
+			);
 		}
 
 		if ( ! count( $lists['result'] ) > 0 ) {
@@ -469,6 +463,10 @@ class Gragrid extends GFFeedAddOn {
 	 * @return array
 	 */
 	public function sengrid_custom_fields_map() {
+		if ( ! $this->init_api() ) {
+			return array();
+		}
+
 		$fields        = array();
 		$custom_fields = (array) rgar( $this->api->get_custom_fields(), 'custom_fields' );
 		$custom_fields = array_filter( $custom_fields );
