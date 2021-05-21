@@ -119,9 +119,9 @@ class Gragrid extends GFFeedAddOn {
 	 * @since 1.0.0
 	 *
 	 * @access protected
-	 * @var    Gragrid_API $api Contains an instance of the SendGrid API library.
+	 * @var    Gragrid_API|null $api Contains an instance of the SendGrid API library.
 	 */
-	public $api = null;
+	protected $api = null;
 
 	/**
 	 * Add-on constructor
