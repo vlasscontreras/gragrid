@@ -469,6 +469,10 @@ class Gragrid extends GFFeedAddOn {
 	 * @return array
 	 */
 	public function sengrid_custom_fields_map() {
+		if ( ! $this->init_api() ) {
+			return;
+		}
+
 		$fields        = array();
 		$custom_fields = (array) rgar( $this->api->get_custom_fields(), 'custom_fields' );
 		$custom_fields = array_filter( $custom_fields );
