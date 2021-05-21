@@ -72,6 +72,10 @@ You can also customize the SendGrid API requests using the following hook:
 
 == Changelog ==
 
+= 2.2.0 =
+* Fixes fatal error due to unitialized API class on Gravity Forms 2.5+ [[#15](https://github.com/vlasscontreras/gragrid/issues/15)]
+* Adds error feedback when contact lists cannot be retrieved on the feed settings
+
 = 2.1.0 =
 * Adds support to map more reserved/default SendGrid fields
 * Adds support to map custom fields 🥳
