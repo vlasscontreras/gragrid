@@ -3,9 +3,9 @@ Contributors: vlass
 Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.7
+Tested up to: 5.7.2
 Requires PHP: 7.3
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,10 @@ You can also customize the SendGrid API requests using the following hook:
 3. Feed settings page
 
 == Changelog ==
+
+= 2.2.0 =
+* Fixes fatal error due to unitialized API class on Gravity Forms 2.5+ [[#15](https://github.com/vlasscontreras/gragrid/issues/15)]
+* Adds error feedback when contact lists cannot be retrieved on the feed settings
 
 = 2.1.0 =
 * Adds support to map more reserved/default SendGrid fields
