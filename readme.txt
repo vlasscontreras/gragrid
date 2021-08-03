@@ -3,9 +3,9 @@ Contributors: vlass
 Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.7.2
+Tested up to: 5.8
 Requires PHP: 7.3
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,13 +23,19 @@ Integrate your Gravity Forms with SendGrid to send submissions with email fields
 
 == Frequently Asked Questions ==
 
+= Why can't I create a feed? =
+
+Make sure you have set a valid API key in the global SendGrid settings by going to Forms > Settings > SendGrid. There should be a green checkmark next to the API key field if the API key is valid.
+
+= What permissions do I need to select when creating an API key? =
+
+This plugin only requires full access to **Marketing > Marketing**.
+
 = Why the field dropdowns in the mapping settings are empty? =
 
-To map:
-
-* The **Email** you need to have a field of type [Email](https://docs.gravityforms.com/email/) or [Hidden](https://docs.gravityforms.com/hidden/).
-* The **First Name** and **Last Name** you need to have a field of type [Name](https://docs.gravityforms.com/name/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
-* The **Address** you need to have a field of type [Address](https://docs.gravityforms.com/address-field/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
+* To map the **Email** you need to have a field of type [Email](https://docs.gravityforms.com/email/) or [Hidden](https://docs.gravityforms.com/hidden/).
+* To map the **First Name** and **Last Name** you need to have a field of type [Name](https://docs.gravityforms.com/name/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
+* To map the **Address** you need to have a field of type [Address](https://docs.gravityforms.com/address-field/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
 
 = The field dropdown options in the mapping settings are blank but selectable, what's going on? =
 
@@ -71,6 +77,11 @@ You can also customize the SendGrid API requests using the following hook:
 3. Feed settings page
 
 == Changelog ==
+
+= 2.2.1 =
+* Handles fatal error on the feed listing when the API key is invalid
+* Escape HTML in translation strings
+* Tested on WordPress 5.8
 
 = 2.2.0 =
 * Fixes fatal error due to unitialized API class on Gravity Forms 2.5+ [[#15](https://github.com/vlasscontreras/gragrid/issues/15)]

@@ -131,7 +131,7 @@ class Gragrid extends GFFeedAddOn {
 	public function __construct() {
 		parent::__construct();
 
-		$this->_title = __( 'Gravity Forms: SendGrid Add-on', 'gragrid' );
+		$this->_title = esc_html__( 'Gravity Forms: SendGrid Add-on', 'gragrid' );
 	}
 
 	/**
@@ -275,9 +275,9 @@ class Gragrid extends GFFeedAddOn {
 			array(
 				'type'           => 'feed_condition',
 				'name'           => 'enabled',
-				'label'          => __( 'Conditional logic', 'gragrid' ),
-				'checkbox_label' => __( 'Enable', 'gragrid' ),
-				'instructions'   => __( 'Send this lead to SendGrid if', 'gragrid' ),
+				'label'          => esc_html__( 'Conditional logic', 'gragrid' ),
+				'checkbox_label' => esc_html__( 'Enable', 'gragrid' ),
+				'instructions'   => esc_html__( 'Send this lead to SendGrid if', 'gragrid' ),
 			),
 			array( 'type' => 'save' ),
 		);
@@ -534,15 +534,15 @@ class Gragrid extends GFFeedAddOn {
 			return rgars( $feed, 'meta/sendgrid_list' );
 		}
 
-		try {
-			$list = $this->api->get_list( rgars( $feed, 'meta/sendgrid_list' ) );
+		$list = $this->api->get_list( rgars( $feed, 'meta/sendgrid_list' ) );
 
-			return $list['name'];
-		} catch ( Exception $e ) {
-			$this->log_error( __METHOD__ . ': Could not retrieve the contact list: ' . $e->getMessage() );
+		if ( is_wp_error( $list ) ) {
+			$this->log_error( __METHOD__ . ': Could not retrieve the contact list: ' . $list->get_error_message() );
 
 			return rgars( $feed, 'meta/sendgrid_list' );
 		}
+
+		return $list['name'];
 	}
 
 	// # FEED PROCESSING -----------------------------------------------------------------------------------------------
