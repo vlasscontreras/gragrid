@@ -137,7 +137,7 @@ class Gragrid_API {
 	 */
 	private function request( $path = '', $data = array(), $method = 'GET' ) {
 		if ( rgblank( $this->api_key ) ) {
-			return new WP_Error( __METHOD__, __( 'API key must be defined to process an API request.', 'gragrid' ) );
+			return new WP_Error( __METHOD__, esc_html__( 'API key must be defined to process an API request.', 'gragrid' ) );
 		}
 
 		$request_url = 'https://api.sendgrid.com/v3' . $path;

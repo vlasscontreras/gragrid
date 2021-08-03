@@ -131,7 +131,7 @@ class Gragrid extends GFFeedAddOn {
 	public function __construct() {
 		parent::__construct();
 
-		$this->_title = __( 'Gravity Forms: SendGrid Add-on', 'gragrid' );
+		$this->_title = esc_html__( 'Gravity Forms: SendGrid Add-on', 'gragrid' );
 	}
 
 	/**
@@ -275,9 +275,9 @@ class Gragrid extends GFFeedAddOn {
 			array(
 				'type'           => 'feed_condition',
 				'name'           => 'enabled',
-				'label'          => __( 'Conditional logic', 'gragrid' ),
-				'checkbox_label' => __( 'Enable', 'gragrid' ),
-				'instructions'   => __( 'Send this lead to SendGrid if', 'gragrid' ),
+				'label'          => esc_html__( 'Conditional logic', 'gragrid' ),
+				'checkbox_label' => esc_html__( 'Enable', 'gragrid' ),
+				'instructions'   => esc_html__( 'Send this lead to SendGrid if', 'gragrid' ),
 			),
 			array( 'type' => 'save' ),
 		);
