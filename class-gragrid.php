@@ -534,15 +534,15 @@ class Gragrid extends GFFeedAddOn {
 			return rgars( $feed, 'meta/sendgrid_list' );
 		}
 
-		try {
-			$list = $this->api->get_list( rgars( $feed, 'meta/sendgrid_list' ) );
+		$list = $this->api->get_list( rgars( $feed, 'meta/sendgrid_list' ) );
 
-			return $list['name'];
-		} catch ( Exception $e ) {
-			$this->log_error( __METHOD__ . ': Could not retrieve the contact list: ' . $e->getMessage() );
+		if ( is_wp_error( $list ) ) {
+			$this->log_error( __METHOD__ . ': Could not retrieve the contact list: ' . $list->get_error_message() );
 
 			return rgars( $feed, 'meta/sendgrid_list' );
 		}
+
+		return $list['name'];
 	}
 
 	// # FEED PROCESSING -----------------------------------------------------------------------------------------------
