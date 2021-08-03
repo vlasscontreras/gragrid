@@ -72,6 +72,11 @@ You can also customize the SendGrid API requests using the following hook:
 
 == Changelog ==
 
+= 2.2.1 =
+* Handles fatal error on the feed listing when the API key is invalid
+* Escape HTML in translation strings
+* Tested on WordPress 5.8
+
 = 2.2.0 =
 * Fixes fatal error due to unitialized API class on Gravity Forms 2.5+ [[#15](https://github.com/vlasscontreras/gragrid/issues/15)]
 * Adds error feedback when contact lists cannot be retrieved on the feed settings
