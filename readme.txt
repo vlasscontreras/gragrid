@@ -23,13 +23,19 @@ Integrate your Gravity Forms with SendGrid to send submissions with email fields
 
 == Frequently Asked Questions ==
 
+= Why can't I create a feed? =
+
+Make sure you have set a valid API key in the global SendGrid settings by going to Forms > Settings > SendGrid. There should be a green checkmark next to the API key field if the API key is valid.
+
+= What permissions do I need to select when creating an API key? =
+
+This plugin only requires full access to **Marketing > Marketing**.
+
 = Why the field dropdowns in the mapping settings are empty? =
 
-To map:
-
-* The **Email** you need to have a field of type [Email](https://docs.gravityforms.com/email/) or [Hidden](https://docs.gravityforms.com/hidden/).
-* The **First Name** and **Last Name** you need to have a field of type [Name](https://docs.gravityforms.com/name/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
-* The **Address** you need to have a field of type [Address](https://docs.gravityforms.com/address-field/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
+* To map the **Email** you need to have a field of type [Email](https://docs.gravityforms.com/email/) or [Hidden](https://docs.gravityforms.com/hidden/).
+* To map the **First Name** and **Last Name** you need to have a field of type [Name](https://docs.gravityforms.com/name/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
+* To map the **Address** you need to have a field of type [Address](https://docs.gravityforms.com/address-field/), [Text](https://docs.gravityforms.com/text-field/), or [Hidden](https://docs.gravityforms.com/hidden/)
 
 = The field dropdown options in the mapping settings are blank but selectable, what's going on? =
 
