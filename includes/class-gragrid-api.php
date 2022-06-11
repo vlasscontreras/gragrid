@@ -50,9 +50,7 @@ class Gragrid_API {
 	public function get_lists() {
 		$response = $this->request(
 			'/marketing/lists',
-			array(
-			'page_size' => 1000,
-			)
+			array( 'page_size' => 1000 )
 		);
 
 		if ( ! $this->is_valid_response( $response, 200 ) ) {
