@@ -43,6 +43,7 @@ class Gragrid_API {
 	 * Get all SendGrid contact lists.
 	 *
 	 * @since 1.0.0
+	 * @since 2.2.2 Added the page_size parameter to SendGrid's maximum.
 	 *
 	 * @access public
 	 * @return array|WP_Error

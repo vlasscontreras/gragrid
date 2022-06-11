@@ -3,9 +3,9 @@ Contributors: vlass
 Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 7.3
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ You can also customize the SendGrid API requests using the following hook:
 3. Feed settings page
 
 == Changelog ==
+
+= 2.2.2 =
+* Fixes the truncated contact lists on the feed settings page
+* Tested on WordPress 6.0
 
 = 2.2.1 =
 * Handles fatal error on the feed listing when the API key is invalid
