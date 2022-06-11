@@ -1,17 +1,17 @@
-# Copyright (C) 2021 Vladimir Contreras
+# Copyright (C) 2022 Vladimir Contreras
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Gragrid: Gravity Forms + SendGrid 2.2.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gragrid\n"
+"Project-Id-Version: Gragrid: Gravity Forms + SendGrid 2.2.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gragrid-git\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-08-03T01:02:54+00:00\n"
+"POT-Creation-Date: 2022-06-11T03:21:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.5.0\n"
+"X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: gragrid\n"
 
 #. Plugin Name of the plugin
@@ -191,6 +191,6 @@ msgstr ""
 msgid "Unable to add recipient to list: %s"
 msgstr ""
 
-#: includes/class-gragrid-api.php:140
+#: includes/class-gragrid-api.php:144
 msgid "API key must be defined to process an API request."
 msgstr ""

@@ -10,7 +10,7 @@
  * Plugin Name:       Gragrid: Gravity Forms + SendGrid
  * Plugin URI:        https://github.com/vlasscontreras/gragrid
  * Description:       Integrates Gravity Forms with SendGrid, allowing form submissions to be automatically sent to your SendGrid contact lists.
- * Version:           2.2.1
+ * Version:           2.2.2
  * Requires at least: 5.2
  * Requires PHP:      7.3
  * Author:            Vladimir Contreras
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Current add-on version
  */
-define( 'GRAGRID_VERSION', '2.2.1' );
+define( 'GRAGRID_VERSION', '2.2.2' );
 
 /**
  * If the Feed Add-On Framework exists, SendGrid Add-On is loaded.
