@@ -3,7 +3,7 @@ Contributors: vlass
 Donate link: https://github.com/vlasscontreras/gragrid
 Tags: forms, emails, subscribers, sendgrid, gravity forms
 Requires at least: 5.2
-Tested up to: 5.8
+Tested up to: 6.0
 Requires PHP: 7.3
 Stable tag: 2.2.2
 License: GPLv2 or later
