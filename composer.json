@@ -34,5 +34,10 @@
     "support": {
         "issues": "https://github.com/vlasscontreras/gragrid/issues",
         "source": "https://github.com/vlasscontreras/gragrid"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
