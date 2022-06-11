@@ -78,6 +78,10 @@ You can also customize the SendGrid API requests using the following hook:
 
 == Changelog ==
 
+= 2.2.2 =
+* Fixes the truncated contact lists on the feed settings page
+* Tested on WordPress 6.0
+
 = 2.2.1 =
 * Handles fatal error on the feed listing when the API key is invalid
 * Escape HTML in translation strings
