@@ -43,12 +43,16 @@ class Gragrid_API {
 	 * Get all SendGrid contact lists.
 	 *
 	 * @since 1.0.0
+	 * @since 2.2.2 Added the page_size parameter to SendGrid's maximum.
 	 *
 	 * @access public
 	 * @return array|WP_Error
 	 */
 	public function get_lists() {
-		$response = $this->request( '/marketing/lists' );
+		$response = $this->request(
+			'/marketing/lists',
+			array( 'page_size' => 1000 )
+		);
 
 		if ( ! $this->is_valid_response( $response, 200 ) ) {
 			return $this->set_error( $response );
